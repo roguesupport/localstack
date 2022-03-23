@@ -12,6 +12,7 @@ import xmltodict
 from requests.models import Response
 
 from localstack import config
+from localstack.aws.challenger import ServiceNamerParserChallenger
 from localstack.constants import (
     HEADER_LOCALSTACK_EDGE_URL,
     HEADER_LOCALSTACK_REQUEST_URL,
@@ -99,6 +100,13 @@ class ProxyListenerEdge(ProxyListener):
 
         # extract API details
         api, port, path, host = get_api_from_headers(headers, method=method, path=path, data=data)
+
+        if port and api:
+            response = ServiceNamerParserChallenger(api).forward_request(
+                method, path, data, headers
+            )
+            if response is not None:
+                return response
 
         set_default_region_in_headers(headers)
 

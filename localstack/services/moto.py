@@ -129,8 +129,8 @@ def MotoFallbackDispatcher(provider: object) -> DispatchTable:
 def _wrap_with_fallthrough(handler: ServiceRequestHandler) -> ServiceRequestHandler:
     def _call(context, req) -> ServiceResponse:
         try:
-            # handler will typically be an ASF provider method, and in case it hasn't been implemented, we try to
-            # fall through to moto
+            # handler will typically be an ASF provider method, and in case
+            # it hasn't been implemented, we try to fall through to moto
             return handler(context, req)
         except NotImplementedError:
             return proxy_moto(context)

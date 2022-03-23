@@ -24,6 +24,7 @@ if TYPE_CHECKING:
     from mypy_boto3_apigateway import APIGatewayClient
     from mypy_boto3_cloudformation import CloudFormationClient
     from mypy_boto3_cloudwatch import CloudWatchClient
+    from mypy_boto3_cognito_idp import CognitoIdentityProviderClient
     from mypy_boto3_dynamodb import DynamoDBClient
     from mypy_boto3_ec2 import EC2Client
     from mypy_boto3_es import ElasticsearchServiceClient
@@ -74,6 +75,11 @@ def dynamodb_client() -> "DynamoDBClient":
 @pytest.fixture(scope="class")
 def apigateway_client() -> "APIGatewayClient":
     return _client("apigateway")
+
+
+@pytest.fixture(scope="class")
+def cognito_idp_client() -> "CognitoIdentityProviderClient":
+    return _client("cognito-idp")
 
 
 @pytest.fixture(scope="class")

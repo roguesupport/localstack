@@ -372,7 +372,7 @@ class RequestParser(abc.ABC):
             request_uri_regex = request_uri_regex.replace(">[^?&]+)", ">[^?&]+?)")
             request_uri_regex = request_uri_regex.replace(">[^?&]_greedy_+)", ">[^?&]+)")
         # Make sure the URL starts with our regex, do not add a fence to the end (there might be optional query params).
-        request_uri_regex = f"^{request_uri_regex}"
+        request_uri_regex = f"^{request_uri_regex}$"
         # The result is a regex itself.
         return re.compile(request_uri_regex)
 
